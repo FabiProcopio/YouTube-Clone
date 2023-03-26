@@ -5,9 +5,42 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+/* Scroll bar for different browsers */
+* {
+  scrollbar-width: 10px;
+  scrollbar-color: #8c8c8c;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8c8c8c;
+  border-radius: 20px;
+}
+
+#HeaderStyleSite{
+  width: 100%;
+  display: flex;
+}
+
+#MainContainersite{
+  width: 100%; 
+  padding: 0px 20px 20px 20px; 
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
 }
