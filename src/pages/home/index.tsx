@@ -70,6 +70,20 @@ const videos = [
         views: '7.7M',
         time: '4 years'
     },
+    {
+        image: '', 
+        title: 'Goblin Slayer OST - MainTheme - ゴブリンスレイヤー',
+        channel: 'Procsan',
+        views: '7.7M',
+        time: '4 years'
+    },
+    {
+        image: '', 
+        title: 'Goblin Slayer OST - MainTheme - ゴブリンスレイヤー',
+        channel: 'Procsan',
+        views: '7.7M',
+        time: '4 years'
+    },
 ]
 
 function Home() {

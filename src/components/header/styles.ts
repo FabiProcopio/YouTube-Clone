@@ -28,6 +28,7 @@ export const ButtonContainer = styled.div<{ margin?: string }>`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    z-index: 9999;
 
     :hover {
         background-color: #f2f2f2;
@@ -78,6 +79,7 @@ export const SearchButton = styled.div`
 export const HeaderButton = styled.div`
     width: auto;
     display: flex;
+    z-index: 3000;
 `;
 
 export const SignInButton = styled.div`

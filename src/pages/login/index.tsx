@@ -21,10 +21,21 @@ function Login(){
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
-        const handleSubmit = (event: React.FormEvent) => {
+
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        handleLogin(email, password);
-        navigate('/');
+        try {
+            await handleLogin(email, password);
+            navigate('/home');
+        } catch (error) {
+            alert('Login failed');
+        }
+    };
+
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit(event);
+        }
     };
 
     return (
@@ -43,7 +54,8 @@ function Login(){
                             placeholder='Email'
                             type='email' 
                             value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={handleKeyPress} 
                         />
                         <div className='emailplaceholder'>Email</div>
                     </EmailBox>
@@ -53,6 +65,7 @@ function Login(){
                             type={showPassword ? 'text' : 'password'}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={handleKeyPress}
                             />
                         <div className='passwordplaceholder'>Password</div>
                     </PasswordBox>
@@ -72,7 +85,7 @@ function Login(){
                             </form>
                         </LoginButton>
                         <SignUpButton>
-                            <button onClick={() => handleLogin(email, password)}>Create Account</button>
+                            <button onClick={() => navigate('/signup')}>Create Account</button>
                         </SignUpButton>
                     </ContainerButtons>
 

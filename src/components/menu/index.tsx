@@ -16,6 +16,12 @@ import ShortsIcon from '../../assets/shorts.png';
 import SubIcon from '../../assets/subscriptions.png';
 import LibraryIcon from '../../assets/library.png';
 import HistoryIcon from '../../assets/history.png';
+
+import YourVideosIcon from '../../assets/accountuser.png';
+import WatchLaterIcon from '../../assets/watch.png';
+import PlaylistIcon from '../../assets/playlist.png';
+import LikedVideosIcon from '../../assets/thumbsup.png';
+
 import UserIcon from '../../assets/usericon.png';
 import TrendingIcon from '../../assets/trending.png';
 import MusicIcon from '../../assets/music.png';
@@ -34,6 +40,7 @@ import ReportIcon from '../../assets/reporthistory.png';
 import HelpIcon from '../../assets/help.png';
 import FeedbackIcon from '../../assets/feedback.png';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
 
 const itemIcons: { [key: string]: string } = {
     Home: HomeIcon,
@@ -41,6 +48,12 @@ const itemIcons: { [key: string]: string } = {
     Subscriptions: SubIcon,
     Library: LibraryIcon,
     History: HistoryIcon,
+    
+    Your_Videos: YourVideosIcon,
+    Watch_later: WatchLaterIcon,
+    Playlist: PlaylistIcon,
+    Liked_Videos: LikedVideosIcon,
+    
     Trending: TrendingIcon,
     Music: MusicIcon,
     Movies: MoviesIcon,
@@ -60,11 +73,17 @@ const itemIcons: { [key: string]: string } = {
 };
 
 const items = [
-    {name: 'Home', link: '/'},                                  // 0
+    {name: 'Home', link: '/home'},                                  // 0
     {name: 'Shorts', link: '/shorts'},                          // 1
     {name: 'Subscriptions', link: '/subscriptions'},            // 2
     {name: 'Library', link: '/library'},                        // 3
     {name: 'History', link: '/history'},                        // 4
+
+    {name: 'Your Videos', link: '/your_videos'},                        // 4
+    {name: 'Watch later', link: '/watch_later'},                        // 4
+    {name: 'Playlist', link: '/playlist'},                        // 4
+    {name: 'Liked Videos', link: '/liked_videos'},                        // 4
+
     {name: 'Trending', link: '/trending'},                      // 5
     {name: 'Music', link: '/music'},                            // 6
     {name: 'Movies', link: '/movies'},                          // 7
@@ -99,8 +118,9 @@ const links = [
 ]
 
 function Menu() {
-  const { openMenu } = useContext(MenuContext);
-  const navigate = useNavigate();
+    const { login } = useContext(UserContext);
+    const { openMenu } = useContext(MenuContext);
+    const navigate = useNavigate();
 
 
   return (
@@ -125,6 +145,16 @@ function Menu() {
 
 
         <SectionOpenOnly openMenu={openMenu}>
+            {login?
+                <>
+                    {items.slice(5,9).map((items, index) => (
+                        <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(items.link)}>
+                            <ButtonIcon alt="" src={itemIcons[items.name.replace(' ', '_')]} />
+                            <span> {items.name} </span>
+                        </MenuItem>
+                    ))}
+                </>
+            :
                 <SignIn openMenu={openMenu}>
                         <p  style={{fontSize: '15px'}}>
                             Sign in to like videos <br/>
@@ -135,11 +165,12 @@ function Menu() {
                             <span> Sign in </span>
                         </SignInButton>
                 </SignIn>
+            }
         </SectionOpenOnly>
         
         <SectionOpenOnly openMenu={openMenu}>
             <h3>Explore</h3>
-            {items.slice(5,13).map((items, index) => (
+            {items.slice(9,17).map((items, index) => (
                 <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(items.link)}>
                     <ButtonIcon alt="" src={itemIcons[items.name]} />
                     <span> {items.name} </span>
@@ -148,7 +179,7 @@ function Menu() {
         </SectionOpenOnly>
 
         <SectionOpenOnly openMenu={openMenu}>
-            {items.slice(13,14).map((items, index) => (
+            {items.slice(17,18).map((items, index) => (
                 <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(items.link)}>
                     <ButtonIcon alt="" src={itemIcons[items.name.replace(' ', '_')]} />
                     <span> {items.name} </span>
@@ -157,7 +188,7 @@ function Menu() {
         </SectionOpenOnly>
         <SectionOpenOnly openMenu={openMenu}>
             <h3>More from YouTube</h3>
-            {items.slice(14,17).map((items, index) => (
+            {items.slice(18,21).map((items, index) => (
                 <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(items.link)}>
                     <ButtonIcon alt="" src={itemIcons[items.name.replace(' ', '_')]} />
                     <span> {items.name} </span>
@@ -165,7 +196,7 @@ function Menu() {
             ))}
         </SectionOpenOnly>
         <SectionOpenOnly openMenu={openMenu}>
-            {items.slice(17,21).map((items, index) => (
+            {items.slice(21,25).map((items, index) => (
                 <MenuItem key={index} openMenu={openMenu} onClick={() => navigate(items.link)}>
                     <ButtonIcon alt="" src={itemIcons[items.name.replace(' ', '_')]} />
                     <span> {items.name} </span>

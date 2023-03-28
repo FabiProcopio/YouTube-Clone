@@ -9,6 +9,17 @@ export const UserStorage = ({ children }: any ) => {
     const [user, setUser] = useState({});
     const [token, setToken] = useState(localStorage.getItem('token') as string);
 
+    const signUpUser = (name: string, email: string, password: string) => {
+        api.post('/user/sign-up', { name, email, password }).then(({ data }) => {
+            setLogin(true);
+            localStorage.setItem('token', data.token);
+            setToken(data.token);
+            getUser(data.token);
+          }).catch((error) => {
+            console.log('Sign up failed', error);
+        })
+    }
+
 
     const getUser = (token: string) => {
         api.get('/user/get-user', {headers: {Authorization: token}}).then(({ data }) => {
@@ -26,8 +37,8 @@ export const UserStorage = ({ children }: any ) => {
 
     const logOut = () => {
         localStorage.removeItem('token');
-        setLogin(false)
-        setUser({})
+        setLogin(false);
+        setUser({});
     }
 
     const handleLogin = (email: string, password: string) => {
@@ -46,7 +57,8 @@ export const UserStorage = ({ children }: any ) => {
             login,
             user,
             handleLogin,
-            logOut
+            logOut,
+            signUpUser
         }}>
             {children}
         </UserContext.Provider>

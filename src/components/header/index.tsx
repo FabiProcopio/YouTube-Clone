@@ -1,4 +1,8 @@
 import { useContext } from 'react';
+import { MenuContext } from '../../context/menucontrol';
+import { UserControl } from '../../context/usercontrol';
+import { UserContext } from '../../context/userContext';
+import { useNavigate } from 'react-router-dom';
 import {
      Container, 
      LogoContainer,
@@ -11,7 +15,8 @@ import {
      HeaderButton,
      SignInButton,
      ButtonIconUser,
-     ButtonContainerDot
+     ButtonContainerDot,
+
 } from "./styles";
 
 import UserIcon from '../../assets/usericon.png';
@@ -22,22 +27,22 @@ import MicIcon from '../../assets/microphone.png';
 import VideoIcon from '../../assets/video.png';
 import BellIcon from '../../assets/bell.png';
 import DotmenuIcon from '../../assets/dotmenu.png';
-import { MenuContext } from '../../context/menucontrol';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/userContext';
+
 
 
 
 function Header(){
     const navigate = useNavigate();
-    const { login, logOut, user } = useContext(UserContext);
-    // const userName = user?.name;
-    // const firstChr = userName?.charAt(0);
-    // console.log(firstChr);
+    const { login, user } = useContext(UserContext);
 
     const { setOpenMenu, openMenu } = useContext(MenuContext);
     const handleMenuClick = () => {
         setOpenMenu(!openMenu);
+    };
+
+    const { setOpenUser, openUser } = useContext(UserControl);
+    const handleUserClick = () => {
+        setOpenUser(!openUser);
     };
 
 
@@ -79,10 +84,13 @@ function Header(){
                             <ButtonIcon alt="" src={BellIcon} />
                         </ButtonContainer>
 
-                        <ButtonContainer margin='0 0 0 10px'>
+                        <ButtonContainer 
+                            onClick={handleUserClick}
+                            margin='0 0 0 10px'
+                        >
                             {user?.name?.charAt(0) ?? ''}
                         </ButtonContainer>
-                        <span onClick={() => logOut}>Logout</span>
+                        {/* <button onClick={() => logOut()}>Logout</button> */}
                     </>
                 :
                     <>

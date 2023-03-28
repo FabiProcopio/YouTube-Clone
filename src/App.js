@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from "./components/header";
 import Menu from "./components/menu";
 import { MenuContext } from './context/menucontrol';
+import { UserControl } from './context/usercontrol';
 import BrowseChannels from './pages/browse_channels';
 import Gaming from './pages/gaming';
 import Help from './pages/help/inde';
@@ -26,29 +27,44 @@ import YoutubeMusic from './pages/youtube_music';
 import YoutubePremium from './pages/youtube_premium';
 import { UserStorage } from './context/userContext';
 import Login from './pages/login';
+import PopupMenu from './components/popupMenu';
+import SignUp from './pages/signup';
+import YourVideos from './pages/your_videos';
+import WatchLater from './pages/watch_later';
+import Playlist from './pages/playlist';
+import LikedVideos from './pages/liked_videos';
 
 
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openUser, setOpenUser] = useState(false);
 
   return (
     <UserStorage>
       <BrowserRouter>
         <MenuContext.Provider value={{ openMenu, setOpenMenu }}>
+        <UserControl.Provider value={{ openUser, setOpenUser }}>
           <div className="App">
             <Header />
               <div id='HeaderStyleSite'>
                 <Menu />
                 <div id='MainContainersite'>
                   <Routes>
-                    <Route path='/' element={<Home />} />
+                    <Route path='/' element={<Login />} />
+                    <Route path='/home' element={<Home />} />
                     <Route path='/shorts' element={<Shorts />} />
                     <Route path='/subscriptions' element={<Subscriptions />} />
                     <Route path='/library' element={<Library />} />
                     <Route path='/history' element={<History />} />
 
                     <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<SignUp />} />
+
+                    <Route path='/your_videos' element={<YourVideos />} />
+                    <Route path='/watch_later' element={<WatchLater />} />
+                    <Route path='/playlist' element={<Playlist />} />
+                    <Route path='/liked_videos' element={<LikedVideos />} />
 
                     <Route path='/trending' element={<Trending />} />
                     <Route path='/music' element={<Muisc />} />
@@ -71,9 +87,11 @@ function App() {
                     <Route path='/send_feedback' element={<SendFeedBack />} />
                   </Routes>
                 </div>
+                <PopupMenu />
               </div>
 
           </div>
+        </UserControl.Provider>
         </MenuContext.Provider>
       </BrowserRouter>
     </UserStorage>
