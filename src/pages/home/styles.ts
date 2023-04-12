@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div<{ openMenu: boolean }>`
-    height: 700px;
+    height: 650px;
     width: 100%;
     max-width: 2000px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, minmax(300px, auto));
+    grid-template-rows: repeat(2, minmax(330px, auto));
     overflow: hidden;
     column-gap: 20px;
     row-gap: 0;

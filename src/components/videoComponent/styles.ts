@@ -34,7 +34,6 @@ export const ChannelImage = styled.div`
     align-items: center;
     margin-right: 10px;
     border-radius: 50%;
-    
 `;
 
 export const TextContainer = styled.div`
