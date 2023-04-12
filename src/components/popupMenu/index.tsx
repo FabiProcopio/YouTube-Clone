@@ -49,7 +49,7 @@ const uitemIcons: { [key: string]: string } = {
 };
 
 const uitems = [
-    {name: 'Your channel', link: ''},                              // 0
+    {name: 'Your channel', link: '/your_videos'},                              // 0
     {name: 'YouTube Studio', link: ''},                            // 1
     {name: 'Switch account', link: ''},                            // 2
     {name: 'Sign out', link: '/login'},                                  // 3

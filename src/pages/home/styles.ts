@@ -9,7 +9,7 @@ export const Container = styled.div<{ openMenu: boolean }>`
     grid-template-rows: repeat(2, minmax(300px, auto));
     overflow: hidden;
     column-gap: 20px;
-    row-gap: 50px;
+    row-gap: 0;
     border-bottom: solid 4px #e5e5e5;
     @media (max-width: 1920px) {
         grid-template-columns: ${({ openMenu }) => openMenu ? 'repeat(4, 1fr)' : 'repeat(5, 1fr)'};
@@ -42,7 +42,13 @@ export const MainShortsContainer = styled.div`
     }
 `;
 
-export const ShortsContainer = styled.div<{ openMenu: boolean }>`
+
+export const ShortsContainer = styled.div<{ openMenu: boolean, openFilter: boolean }>`
+    border-bottom: solid 4px #e5e5e5;
+    margin-bottom: 30px;
+`;
+
+export const ShortsCards = styled.div<{ openMenu: boolean, openFilter: boolean }>`
     max-width: 2000px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -50,8 +56,9 @@ export const ShortsContainer = styled.div<{ openMenu: boolean }>`
     overflow: hidden;
     column-gap: 20px;
     row-gap: 50px;
-    border-bottom: solid 4px #e5e5e5;
-    padding-bottom: 50px;
+
+    height: ${({ openFilter }) => openFilter ? 'auto' : '370px'};
+    padding-bottom: ${({ openFilter }) => openFilter ? '0px' : '20px'};
 
     @media (max-width: 1920px) {
         grid-template-columns: ${({ openMenu }) => openMenu ? 'repeat(8, 1fr)' : 'repeat(10, 1fr)'};
@@ -65,6 +72,21 @@ export const ShortsContainer = styled.div<{ openMenu: boolean }>`
     @media (max-width: 900px) {
         grid-template-columns: repeat(4, 1fr);
         // fix rows
+    }
+`;
+
+export const ButtonMore = styled.button`
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: transparent;
+    border-bottom: solid 2px transparent;
+    border-top: solid 2px transparent;
+    :hover {
+        background-color: #e5e5e5;
+        border-bottom: solid 2px #999999;
+        border-top: solid 2px #999999;
+        cursor: pointer;
     }
 `;
 

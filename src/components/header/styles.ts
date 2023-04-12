@@ -44,11 +44,12 @@ export const ButtonIcon = styled.img`
 
 export const SearchContainer = styled.div`
     display: flex;
+    margin-top: 5px;
 `;  
 
 export const SearchInputContainer = styled.div`
     width: 450px;
-    height: 35px;
+    height: 33px;
     border: 1px solid #d3d3d3;
     border-radius: 40px 0 0 40px;
     display: flex;
@@ -61,9 +62,10 @@ export const SearchInput = styled.input`
     height: 25px;
     outline: none;
     border: none;
+    font-size: 15px;
 `;
 
-export const SearchButton = styled.div`
+export const SearchButton = styled.button`
     border-radius: 0 40px 40px 0;
     height: 35px;
     width: 70px;

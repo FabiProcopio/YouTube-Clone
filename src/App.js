@@ -4,6 +4,7 @@ import Header from "./components/header";
 import Menu from "./components/menu";
 import { MenuContext } from './context/menucontrol';
 import { UserControl } from './context/usercontrol';
+import { FilterContext } from './context/filterControl';
 import BrowseChannels from './pages/browse_channels';
 import Gaming from './pages/gaming';
 import Help from './pages/help/inde';
@@ -33,18 +34,21 @@ import YourVideos from './pages/your_videos';
 import WatchLater from './pages/watch_later';
 import Playlist from './pages/playlist';
 import LikedVideos from './pages/liked_videos';
+import SearchResults from './pages/search_results';
 
 
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
   const [openUser, setOpenUser] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
 
   return (
     <UserStorage>
       <BrowserRouter>
         <MenuContext.Provider value={{ openMenu, setOpenMenu }}>
         <UserControl.Provider value={{ openUser, setOpenUser }}>
+        <FilterContext.Provider value={{ openFilter, setOpenFilter }}>
           <div className="App">
             <Header />
               <div id='HeaderStyleSite'>
@@ -85,12 +89,15 @@ function App() {
                     <Route path='/report_history' element={<ReportHistory />} />
                     <Route path='/help' element={<Help />} />
                     <Route path='/send_feedback' element={<SendFeedBack />} />
+                    
+                    <Route path='/search_results' element={<SearchResults />} />
                   </Routes>
                 </div>
                 <PopupMenu />
               </div>
 
           </div>
+        </FilterContext.Provider>
         </UserControl.Provider>
         </MenuContext.Provider>
       </BrowserRouter>

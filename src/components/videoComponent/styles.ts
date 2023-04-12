@@ -8,11 +8,11 @@ export const Container = styled.div`
     }
 `;
 
-export const ImageBanner = styled.div`
+export const ImageBanner = styled.div<{ imageUrl: string }>`
     width: 100%;
     height: 210px;
     border-radius: 12px;
-    background-image: url('https://i.pinimg.com/originals/f1/ef/96/f1ef96f4c97698e219edff25ff8e2344.jpg');
+    background-image: url(${props => props.imageUrl});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

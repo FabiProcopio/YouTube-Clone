@@ -33,6 +33,7 @@ function SignUp(){
         event.preventDefault();
         try {
             await signUpUser(name, email, password);
+            alert('Account creation successful');
             navigate('/login');
         } catch (error) {
             alert('Accound creation failed');

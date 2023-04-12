@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { MenuContext } from '../../context/menucontrol';
 import { UserControl } from '../../context/usercontrol';
 import { UserContext } from '../../context/userContext';
@@ -30,10 +30,10 @@ import DotmenuIcon from '../../assets/dotmenu.png';
 
 
 
-
 function Header(){
     const navigate = useNavigate();
-    const { login, user } = useContext(UserContext);
+
+    const { login, user, searchVideos } = useContext(UserContext);
 
     const { setOpenMenu, openMenu } = useContext(MenuContext);
     const handleMenuClick = () => {
@@ -45,6 +45,27 @@ function Header(){
         setOpenUser(!openUser);
     };
 
+
+    const [videos, setVideos ] = useState('');
+ 
+    const handleSearchSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const response = await searchVideos(videos);
+            const videosArray = response?.videos ?? [];
+            navigate('/search_results', { state: { videos: videosArray } });
+        } catch (error: any) {
+            console.log('Error searching for videos', error);
+        }
+    };
+      
+    
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setVideos(event.target.value);
+    };
+    
+    
+    
 
     return (
         <Container>
@@ -62,22 +83,25 @@ function Header(){
                 />
             </LogoContainer>
 
-            <SearchContainer>
-                <SearchInputContainer>
-                    <SearchInput placeholder="Search" />
-                </SearchInputContainer>
-                <SearchButton>
-                    <ButtonIcon alt="" src={SearchIcon} />
-                </SearchButton>
-                <ButtonContainer margin='0 0 0 10px'>
-                    <ButtonIcon alt="" src={MicIcon} />
-                </ButtonContainer>
-            </SearchContainer>
+            <form id="search-form" onSubmit={handleSearchSubmit}>
+                <SearchContainer>
+                    <SearchInputContainer>
+                        <SearchInput placeholder="Search" value={videos} onChange={handleInputChange} />
+                    </SearchInputContainer>
+                    <SearchButton>
+                        <ButtonIcon alt="" src={SearchIcon} />
+                    </SearchButton>
+                    <ButtonContainer margin='0 0 0 10px'>
+                        <ButtonIcon alt="" src={MicIcon} />
+                    </ButtonContainer>
+                </SearchContainer>
+            </form>
+
 
             <HeaderButton>
                 {login?
                     <>
-                        <ButtonContainer margin='0 0 0 10px'>
+                        <ButtonContainer margin='0 0 0 10px' onClick={() => navigate('/your_videos')}>
                             <ButtonIcon alt="" src={VideoIcon} />
                         </ButtonContainer>
                         <ButtonContainer margin='0 0 0 10px'>
@@ -90,7 +114,7 @@ function Header(){
                         >
                             {user?.name?.charAt(0) ?? ''}
                         </ButtonContainer>
-                        {/* <button onClick={() => logOut()}>Logout</button> */}
+                        
                     </>
                 :
                     <>

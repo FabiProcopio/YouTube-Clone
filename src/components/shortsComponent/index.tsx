@@ -7,15 +7,15 @@ import {
     TitleContainer 
 } from './styles';
 
-function ShortsComponent() {
+function ShortsComponent({ shorts }: any) {
 
     return (
       <Container>
-        <ImageBanner />
+        <ImageBanner imageUrl={shorts.imageUrl}/>
         <TitleContainer>
             <TextContainer>
-                <Title>BLIND GUARDIAN - The God Machine Tour 2023</Title>
-                <TextCard>778 views</TextCard>
+                <Title>{shorts.title}</Title>
+                <TextCard>{shorts.views} views</TextCard>
             </TextContainer>
         </TitleContainer>
       </Container>

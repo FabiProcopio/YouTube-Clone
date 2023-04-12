@@ -7,11 +7,11 @@ export const Container = styled.div`
     }
 `;
 
-export const ImageBanner = styled.div`
+export const ImageBanner = styled.div<{ imageUrl: string }>`
     width: auto;
     height: 295px;
     border-radius: 12px;
-    background-image: url('https://i.ytimg.com/vi/Rx-NsvNNWQM/hq720_2.jpg?sqp=-oaymwEdCJUDENAFSFXyq4qpAw8IARUAAIhCcAHAAQbQAQE=&rs=AOn4CLDpIhLPJh4ssyBb24RbGRrAaKtzuQ');
+    background-image: url(${props => props.imageUrl});
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;

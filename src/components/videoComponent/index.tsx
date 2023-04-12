@@ -7,20 +7,21 @@ import {
     Title, 
     TitleContainer 
 } from './styles';
+import GetTimeDifference from '../../components/timeComponent';
 
 function VideoComponent({ video }: any) {
-
+    
     return (
-      <Container>
-        <ImageBanner />
+      <Container >
+        <ImageBanner imageUrl={video.imageUrl}/>
         <TitleContainer>
             <ChannelImage>
-                FP
+                {video.username.charAt(0) ?? ''}
             </ChannelImage>
             <TextContainer>
                 <Title>{video.title}</Title>
-                <TextCard>{video.channel}</TextCard>
-                <TextCard>{video.views} views - {video.time} ago</TextCard>
+                <TextCard>{video.username}</TextCard>
+                <TextCard>{video.views} views - {GetTimeDifference(video.created_at)} ago</TextCard>
             </TextContainer>
         </TitleContainer>
       </Container>
